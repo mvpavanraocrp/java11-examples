@@ -1,20 +1,19 @@
 pipeline {
     agent any
-
     stages {
-        stage('clone') {
+        stage ('checkout') {
             steps {
-                git 'https://github.com/hellokaton/java11-examples'
+            git 'https://github.com/amitopenwriteup/java11-examples.git'
             }
         }
-        stage('Build') {
+        stage ('packaging') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage('publish') {
+        stage ('archving') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar'
+                 archiveArtifacts 'target/*.jar'
             }
         }
     }
